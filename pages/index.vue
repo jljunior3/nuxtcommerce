@@ -51,10 +51,15 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  /* margin-top: 160px; */
   height: calc(100vh - 170px);
   overflow: auto;
   margin: 160px 40px 10px 40px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 
   h2 {
     padding-left: 15px;
