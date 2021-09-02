@@ -87,6 +87,11 @@ header {
         border-radius: 4px;
         border: none;
         outline: none;
+        padding-left: 40px;
+        background-image: url('~/assets/icons/search2x.svg');
+        background-size: 18px 18px;
+        background-repeat: no-repeat;
+        background-position: 10px 8px;
       }
     }
   }
