@@ -55,3 +55,12 @@ body {
   clear: both;
   display: table;
 }
+
+@media (max-width: 670px) {
+  .col-1,
+  .col-2,
+  .col-3,
+  .col-4 {
+    width: 100%;
+  }
+}

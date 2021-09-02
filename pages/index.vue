@@ -2,6 +2,7 @@
   <div>
     <Header />
     <main>
+      <h2>Home</h2>
       <p v-if="$fetchState.pending">Fetching mountains...</p>
       <p v-else-if="$fetchState.error">An error occurred :(</p>
 
@@ -50,9 +51,15 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  margin-top: 160px;
+  /* margin-top: 160px; */
   height: calc(100vh - 170px);
   overflow: auto;
+  margin: 160px 40px 10px 40px;
+
+  h2 {
+    padding-left: 15px;
+    font-weight: 900;
+  }
 
   .card {
     height: 300px;
