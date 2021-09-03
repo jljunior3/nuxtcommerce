@@ -1,7 +1,9 @@
 <template>
   <header>
     <section class="info">
-      <h1 class="info__title">MagaNets</h1>
+      <NuxtLink to="/">
+        <h1 class="info__title">MagaNets</h1>
+      </NuxtLink>
     </section>
     <section class="navbar">
       <div class="container">
@@ -12,26 +14,37 @@
               <phone-icon class="phone-icon" />
               Central de atendimento
             </li>
-            <li><heart-icon class="heart-icon" />Lista de desejos</li>
+            <li>
+              <NuxtLink to="/wishlist">
+                <heart-icon class="heart-icon" />Lista de desejos
+              </NuxtLink>
+            </li>
           </ul>
         </nav>
       </div>
       <div class="search">
-        <input class="search__input" type="search" placeholder="Busca" />
+        <search
+          :placeholder="placeholderSearch"
+          @doSearch="setEmitSearchTerm"
+        />
       </div>
     </section>
   </header>
 </template>
 
 <script>
-import PlaceIcon from '~/assets/icons/place.svg?inline'
-import PhoneIcon from '~/assets/icons/phone.svg?inline'
-import HeartIcon from '~/assets/icons/heart.svg?inline'
 export default {
-  components: {
-    PlaceIcon,
-    PhoneIcon,
-    HeartIcon,
+  components: {},
+  props: {
+    placeholderSearch: {
+      type: String,
+      required: true,
+    },
+  },
+  methods: {
+    setEmitSearchTerm(filter) {
+      this.$emit('search', filter.term)
+    },
   },
 }
 </script>
@@ -53,6 +66,11 @@ header {
     align-items: center;
     margin-top: -30px;
     padding-left: 30px;
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
 
     &__title {
       color: white;
@@ -76,22 +94,14 @@ header {
           padding-left: 0;
           color: white;
           font-weight: 500;
-        }
-      }
-    }
 
-    .search {
-      &__input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 4px;
-        border: none;
-        outline: none;
-        padding-left: 40px;
-        background-image: url('~/assets/icons/search2x.svg');
-        background-size: 18px 18px;
-        background-repeat: no-repeat;
-        background-position: 10px 8px;
+          li:last-child {
+            a {
+              text-decoration: none;
+              color: white;
+            }
+          }
+        }
       }
     }
   }
