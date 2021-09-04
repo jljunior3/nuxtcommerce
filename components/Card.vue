@@ -70,7 +70,10 @@ export default {
 <style lang="scss" scoped>
 .card {
   height: 300px;
-  /* border: solid 1px black; */
+
+  @media only screen and (max-width: 600px) {
+    max-height: 270px;
+  }
 
   &__item {
     background: white;
@@ -85,10 +88,15 @@ export default {
     &__image {
       max-width: 40%;
       margin-top: 15px;
+
+      @media only screen and (max-width: 600px) {
+        max-width: 30%;
+      }
     }
 
     &__title {
       font-weight: bold;
+      white-space: break-spaces;
     }
 
     &__price {
@@ -167,21 +175,4 @@ export default {
     }
   }
 }
-
-/* img {
-  background: pink;
-  color: white;
-  fill: white;
-  stroke: white;
-
-  path {
-    color: white;
-    fill: white;
-    stroke: white;
-  }
-
-  .svg-class path {
-    fill: white;
-  }
-} */
 </style>

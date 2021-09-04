@@ -4,6 +4,9 @@
     <main>
       <h2><NuxtLink to="/">Home</NuxtLink> > Lista de desejos</h2>
 
+      <p v-if="errorMessage !== ''" class="empty">
+        Problemas ao carregar a lista de favoritos!
+      </p>
       <div v-if="list.length" class="row">
         <Card
           v-for="item in list"
@@ -12,7 +15,7 @@
           :favorites="favoritedProducts"
           :show-badge="false"
           :show-remove-icon="true"
-          class="col-3"
+          class="col-4 col-s-6 col-m-12 col-lg-3"
           @removeFavoriteProduct="removeFavoriteProduct"
         />
       </div>
@@ -23,12 +26,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import axios from 'axios'
 
 export default {
   data() {
     return {
       favoritedProducts: [],
       searchTerm: '',
+      errorMessage: '',
     }
   },
   computed: {
@@ -58,24 +63,19 @@ export default {
       this.searchTerm = term
     },
     removeFavoriteProduct(product) {
-      if (process.browser) {
-        const exist = this.favoritedProducts.includes(product.id)
+      const exist = this.favoritedProducts.includes(product.id)
 
-        if (exist) {
-          this.favoritedProducts = this.favoritedProducts.filter(
-            (id) => id !== product.id
-          )
-        }
-        localStorage.setItem(
-          'favorites',
-          JSON.stringify(this.favoritedProducts)
+      if (exist) {
+        this.favoritedProducts = this.favoritedProducts.filter(
+          (id) => id !== product.id
         )
       }
+      localStorage.setItem('favorites', JSON.stringify(this.favoritedProducts))
     },
     async getProdutcts() {
       try {
         const response = (
-          await this.$axios.get(
+          await axios.get(
             'https://run.mocky.io/v3/66063904-d43c-49ed-9329-d69ad44b885e'
           )
         ).data.products
@@ -88,30 +88,15 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-main {
-  height: calc(100vh - 170px);
-  overflow: auto;
-  margin: 160px 40px 10px 40px;
-
-  &::-webkit-scrollbar {
-    display: none;
+h2 {
+  a {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
   }
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+}
 
-  h2 {
-    padding-left: 15px;
-    font-weight: 900;
-
-    a {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
-
-  .empty {
-    text-align: center;
-  }
+.empty {
+  text-align: center;
 }
 </style>

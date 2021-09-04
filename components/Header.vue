@@ -1,34 +1,36 @@
 <template>
   <header>
-    <section class="info">
-      <NuxtLink to="/">
-        <h1 class="info__title">MagaNets</h1>
-      </NuxtLink>
-    </section>
-    <section class="navbar">
-      <div class="container">
-        <nav class="navbar__container__menu">
-          <ul class="navbar__container__menu__list">
-            <li><place-icon class="place-icon" /> Cidade: São Paulo</li>
-            <li>
-              <phone-icon class="phone-icon" />
-              Central de atendimento
-            </li>
-            <li>
-              <NuxtLink to="/wishlist">
-                <heart-icon class="heart-icon" />Lista de desejos
-              </NuxtLink>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div class="search">
-        <search
-          :placeholder="placeholderSearch"
-          @doSearch="setEmitSearchTerm"
-        />
-      </div>
-    </section>
+    <div class="row">
+      <section class="info col-3">
+        <NuxtLink to="/">
+          <h1 class="info__title">MagaNets</h1>
+        </NuxtLink>
+      </section>
+      <section class="navbar col-9">
+        <div class="container">
+          <nav class="navbar__container__menu">
+            <ul class="navbar__container__menu__list">
+              <li><place-icon class="place-icon" /> Cidade: São Paulo</li>
+              <li>
+                <phone-icon class="phone-icon" />
+                Central de atendimento
+              </li>
+              <li>
+                <NuxtLink to="/wishlist">
+                  <heart-icon class="heart-icon" />Lista de desejos
+                </NuxtLink>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="search">
+          <search
+            :placeholder="placeholderSearch"
+            @doSearch="setEmitSearchTerm"
+          />
+        </div>
+      </section>
+    </div>
   </header>
 </template>
 
@@ -51,7 +53,6 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  display: flex;
   height: 150px;
   background: #5a2d82;
   position: fixed;
@@ -60,13 +61,16 @@ header {
   width: 100%;
   border-top: solid 8px #371050;
 
-  .info {
-    width: 200px;
-    display: flex;
-    align-items: center;
-    margin-top: -30px;
-    padding-left: 30px;
+  @media only screen and (max-width: 600px) {
+    height: 220px;
+  }
 
+  @media only screen and (min-width: 601px) and (max-width: 899px) {
+    height: 200px;
+  }
+
+  .info {
+    margin-top: 20px;
     a {
       text-decoration: none;
       color: white;
@@ -76,33 +80,62 @@ header {
       color: white;
       margin: 0;
     }
+
+    @media only screen and (max-width: 479px) {
+      padding-bottom: 0;
+    }
+
+    @media only screen and (max-width: 899px) {
+      margin-top: initial;
+    }
   }
 
-  .navbar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-grow: 1;
-    margin: 0px 40px;
+  ul {
+    width: 100%;
+    padding: 0;
+    color: white;
 
-    &__container {
-      &__menu {
-        &__list {
-          display: flex;
-          justify-content: space-between;
-          list-style: none;
-          padding-left: 0;
-          color: white;
-          font-weight: 500;
+    @media only screen and (max-width: 479px) {
+      display: inline-table;
+    }
+  }
+  ul li {
+    display: inline-block;
+  }
+  li:nth-child(1) {
+    width: 33%;
+    text-align: left;
 
-          li:last-child {
-            a {
-              text-decoration: none;
-              color: white;
-            }
-          }
-        }
-      }
+    @media only screen and (max-width: 600px) {
+      display: block;
+      text-align: left;
+      padding-bottom: 10px;
+    }
+
+    @media only screen and (max-width: 479px) {
+      width: 100%;
+    }
+  }
+  li:nth-child(2) {
+    width: 32%;
+    text-align: center;
+
+    @media only screen and (max-width: 600px) {
+      width: 45%;
+      text-align: left;
+    }
+  }
+  li:nth-child(3) {
+    width: 33%;
+    text-align: right;
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    @media only screen and (max-width: 600px) {
+      width: 54%;
+      text-align: right;
     }
   }
 }
